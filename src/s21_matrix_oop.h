@@ -1,9 +1,13 @@
+#ifndef S21_MATRIX
+#define S21_MATRIX
 
 #define DEFAULT_MATRIX_ROWS 3
 #define DEFAULT_MATRIX_COLS 3
 
+#include <cmath>
 #include <iostream>
-#include <vector>
+
+#include "matrix_exceptions.h"
 
 class S21Matrix {
    private:
@@ -18,19 +22,22 @@ class S21Matrix {
 
     // ~S21Matrix();
 
-    int getRows();
-    int getCols();
-    void setRows(int rows);
-    void setCols(int cols);
+    int GetRows();
+    int GetCols();
+    void SetRows(int rows);
+    void SetCols(int cols);
+    void PrintMatrix();
 
     bool EqMatrix(const S21Matrix& other);
 
-    // void SumMatrix(const S21Matrix& other);
-    // void SubMatrix(const S21Matrix& other);
-    // void MulNumber(const double num);
-    // void MulMatrix(const S21Matrix& other);
-    // S21Matrix Transpose();
-    // S21Matrix CalcComplements();
-    // double Determinant();
-    // S21Matrix InverseMatrix();
+    void SumMatrix(const S21Matrix& other);
+    void SubMatrix(const S21Matrix& other);
+    void MulNumber(const double num);
+    void MulMatrix(const S21Matrix& other);
+    S21Matrix Transpose();
+    S21Matrix CalcComplements();
+    double Determinant();
+    S21Matrix InverseMatrix();
 };
+
+#endif  // S21_MATRIX

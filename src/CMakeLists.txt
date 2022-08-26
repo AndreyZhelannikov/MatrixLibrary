@@ -18,10 +18,13 @@ FetchContent_MakeAvailable(googletest)
 
 include(GoogleTest)
 
-set(TEST_SOURCES test/test.cpp)
-set(SOURCES eq_matrix.cpp
-			helpers.cpp
-			matrix_constructors.cpp)
+# set(TEST_SOURCES test/test.cpp)
+
+file(GLOB TEST_SOURCES CONFIGURE_DEPENDS "test/*.h" "test/*.cpp")
+file(GLOB SOURCES CONFIGURE_DEPENDS "*.h" "*.cpp")
+# set(SOURCES eq_matrix.cpp
+			# helpers.cpp
+			# matrix_constructors.cpp)
 
 add_library(s21_matrix_oop STATIC ${SOURCES})
 

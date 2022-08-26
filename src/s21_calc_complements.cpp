@@ -1,0 +1,4 @@
+#include "s21_matrix_oop.h"
+
+S21Matrix CalcComplements() {
+}
