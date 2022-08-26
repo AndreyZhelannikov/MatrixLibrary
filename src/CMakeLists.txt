@@ -1,9 +1,12 @@
-cmake_minimum_required(VERSION 3.23)  # CMake version check
+cmake_minimum_required(VERSION 3.23) 
 
 enable_testing()
 
-project(S21Matrix)               # Create project "simple_example"
-set(CMAKE_CXX_STANDARD 17)            # Enable c++14 standard0
+set(CMAKE_CXX_COMPILER "g++")
+
+project(S21Matrix)
+
+set(CMAKE_CXX_STANDARD 17)
 
 find_package(PkgConfig)
 pkg_check_modules(GTEST REQUIRED gtest)
@@ -18,23 +21,35 @@ FetchContent_MakeAvailable(googletest)
 
 include(GoogleTest)
 
-# set(TEST_SOURCES test/test.cpp)
-
 file(GLOB TEST_SOURCES CONFIGURE_DEPENDS "test/*.h" "test/*.cpp")
 file(GLOB SOURCES CONFIGURE_DEPENDS "*.h" "*.cpp")
-# set(SOURCES eq_matrix.cpp
-			# helpers.cpp
-			# matrix_constructors.cpp)
+set(GCOV_TEST_SOURCES ${TEST_SOURCES})
 
-add_library(s21_matrix_oop STATIC ${SOURCES})
+set(GCOV_EXE mtest_gcov)
+set(TEST_EXE testapp)
+set(MATRIX_LIB s21_matrix_oop)
+set(TEST_MATRIX_LIB s21_matrix_oop_test)
 
-add_executable(testapp ${TEST_SOURCES})
+add_library(${MATRIX_LIB} STATIC ${SOURCES})
+add_library(${TEST_MATRIX_LIB} STATIC ${SOURCES})
 
-target_link_libraries(testapp s21_matrix_oop GTest::gtest_main)
+add_executable(${TEST_EXE} ${TEST_SOURCES})
+add_executable(${GCOV_EXE} ${TEST_SOURCES})
 
-gtest_discover_tests(testapp)
+set_target_properties(${TEST_MATRIX_LIB} PROPERTIES COMPILE_FLAGS "-g -O0 -ftest-coverage -fprofile-arcs")
+set_target_properties(${GCOV_EXE} PROPERTIES LINK_FLAGS "-g -O0 -ftest-coverage -fprofile-arcs")
+set_target_properties(${GCOV_EXE} PROPERTIES LINK_FLAGS " -ftest-coverage -fprofile-arcs")
 
+target_link_libraries(${TEST_EXE} ${MATRIX_LIB} GTest::gtest_main)
+target_link_libraries(${GCOV_EXE} ${TEST_MATRIX_LIB} GTest::gtest_main)
 
-# target_link_libraries(test ${GTEST_LIBRARIES})
-# target_include_directories(test PUBLIC ${GTEST_INCLUDE_DIRS})
-# target_compile_options(test PUBLIC ${GTEST_CFLAGS_OTHER})
+gtest_discover_tests(${TEST_EXE})
+
+add_custom_target(gcov_report
+	DEPENDS ${GCOV_EXE}	
+	COMMAND ./${GCOV_EXE}
+	COMMAND grcov . --branch --guess-directory-when-missing --parallel -b mtest_gcov -t html -s ../src/
+)
+add_custom_target(open 
+	COMMAND open html/index.html
+)

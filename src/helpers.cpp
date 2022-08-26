@@ -21,7 +21,7 @@ void S21Matrix::PrintMatrix() {
     for (int i = 0; i < rows_; ++i) {
         cout << "|";
         for (int j = 0; j < cols_; ++j) {
-            printf("%8.2lf", matrix_[i][j]);
+            printf("%8.2lf", matrix_[i * cols_ + j]);
             if (j != cols_ - 1)
                 cout << " ";
         }
