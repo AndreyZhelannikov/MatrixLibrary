@@ -26,7 +26,7 @@ file(GLOB SOURCES CONFIGURE_DEPENDS "*.h" "*.cpp")
 set(GCOV_TEST_SOURCES ${TEST_SOURCES})
 
 set(GCOV_EXE mtest_gcov)
-set(TEST_EXE testapp)
+set(TEST_EXE apptest)
 set(MATRIX_LIB s21_matrix_oop)
 set(TEST_MATRIX_LIB s21_matrix_oop_test)
 

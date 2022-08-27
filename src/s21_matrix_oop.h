@@ -5,6 +5,7 @@
 #define DEFAULT_MATRIX_COLS 3
 
 #include <cmath>
+#include <cstring>
 #include <iostream>
 
 #include "matrix_exceptions.h"
@@ -14,18 +15,22 @@ class S21Matrix {
     int rows_, cols_;
     double* matrix_;
 
+    double Det();
+    S21Matrix GetCofactor(int row, int col);
+
    public:
     S21Matrix();
     S21Matrix(int rows, int cols);
     S21Matrix(const S21Matrix& other);
-    // S21Matrix(S21Matrix&& other);
+    S21Matrix(S21Matrix&& other);
 
-    // ~S21Matrix();
+    ~S21Matrix();
 
     int GetRows();
     int GetCols();
     void SetRows(int rows);
     void SetCols(int cols);
+    void SetSize(int rows, int cols);
     void PrintMatrix();
 
     bool EqMatrix(const S21Matrix& other);
@@ -36,8 +41,15 @@ class S21Matrix {
     void MulMatrix(const S21Matrix& other);
     S21Matrix Transpose();
     S21Matrix CalcComplements();
-    double Determinant();
     S21Matrix InverseMatrix();
+    double Determinant();
+
+    double& operator()(int row, int col);
+    double operator()(int row, int col) const;
+
+    S21Matrix& operator=(const S21Matrix& other) {
+        return *this;
+    };
 };
 
 #endif  // S21_MATRIX
