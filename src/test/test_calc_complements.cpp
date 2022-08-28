@@ -38,3 +38,9 @@ TEST(test_calc_complements_1, normal) {
         }
     }
 }
+
+TEST(test_calc_complements_1, one_by_one) {
+    S21Matrix m(1, 1);
+
+    ASSERT_ANY_THROW(m.CalcComplements());
+}

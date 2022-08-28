@@ -40,8 +40,30 @@ TEST(test_inverse_matrix, normal) {
     }
 }
 
-TEST(test_inverse_matrix, one_by_one) {
-    S21Matrix m(1, 1);
+TEST(test_inverse_matrix, det_zero) {
+    int n = 3;
+    S21Matrix m(n, n);
+    S21Matrix exp(n, n);
+
+    m(0, 0) = 0;
+    m(0, 1) = 1;
+    m(0, 2) = 2;
+
+    m(1, 0) = 3;
+    m(1, 1) = 4;
+    m(1, 2) = 5;
+
+    m(2, 0) = 6;
+    m(2, 1) = 7;
+    m(2, 2) = 8;
+
+    ASSERT_ANY_THROW(m.InverseMatrix());
+}
+
+TEST(test_inverse_matrix, rnec) {
+    int n = 3;
+    S21Matrix m(n + 1, n);
+
     ASSERT_ANY_THROW(m.InverseMatrix());
 }
 
@@ -68,4 +90,12 @@ TEST(test_inverse_matrix, two_by_two) {
             ASSERT_DOUBLE_EQ(res(i, j), exp(i, j));
         }
     }
+}
+
+TEST(test_inverse_matrix, one_by_one) {
+    S21Matrix m(1, 1);
+    m(0, 0) = 5;
+    S21Matrix res = m.InverseMatrix();
+    res.PrintMatrix();
+    ASSERT_DOUBLE_EQ(res(0, 0), 1.0 / 5.0);
 }

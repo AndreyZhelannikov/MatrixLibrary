@@ -27,7 +27,8 @@ void S21Matrix::SetSize(int rows, int cols) {
                 changed[i * cols + j] = matrix_[i * cols_ + j];
             }
         }
-        delete[] matrix_;
+        if (matrix_)
+            delete[] matrix_;
         matrix_ = changed;
         rows_ = rows;
         cols_ = cols;
