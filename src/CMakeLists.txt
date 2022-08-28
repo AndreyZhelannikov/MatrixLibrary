@@ -36,6 +36,7 @@ add_library(${TEST_MATRIX_LIB} STATIC ${SOURCES})
 add_executable(${TEST_EXE} ${TEST_SOURCES})
 add_executable(${GCOV_EXE} ${TEST_SOURCES})
 
+set_source_files_properties(${SOURCES} PROPERTIES COMPILE_FLAGS "-g")
 set_target_properties(${TEST_MATRIX_LIB} PROPERTIES COMPILE_FLAGS "-g -O0 -ftest-coverage -fprofile-arcs")
 set_target_properties(${GCOV_EXE} PROPERTIES LINK_FLAGS "-g -O0 -ftest-coverage -fprofile-arcs")
 set_target_properties(${GCOV_EXE} PROPERTIES LINK_FLAGS " -ftest-coverage -fprofile-arcs")
