@@ -8,7 +8,7 @@ class CustomException : public std::exception {
     char const *message;
 
    public:
-    CustomException(char const *msg) {
+    explicit CustomException(char const *msg) {
         message = msg;
     }
     char const *what() {

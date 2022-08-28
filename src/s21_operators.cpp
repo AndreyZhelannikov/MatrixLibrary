@@ -21,7 +21,7 @@ S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
     SetSize(other.rows_, other.cols_);
     std::memcpy(matrix_, other.matrix_, other.rows_ * other.cols_ * sizeof(double));
     return *this;
-};
+}
 
 S21Matrix S21Matrix::operator+(const S21Matrix& other) {
     S21Matrix res = *this;

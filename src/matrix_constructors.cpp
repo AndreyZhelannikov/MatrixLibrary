@@ -3,11 +3,7 @@
 S21Matrix::S21Matrix() {
     rows_ = DEFAULT_MATRIX_ROWS;
     cols_ = DEFAULT_MATRIX_COLS;
-    if (rows_ > 0 && cols_ > 0) {
-        matrix_ = new double[rows_ * cols_]();
-    } else {
-        throw CustomException("incorrect matrix");
-    }
+    matrix_ = new double[rows_ * cols_]();
 }
 
 S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {

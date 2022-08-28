@@ -3,8 +3,6 @@
 #include "../s21_matrix_oop.h"
 
 TEST(test_determinant, normal) {
-    int exp = 0;
-
     int rows = 3;
     int cols = 3;
     S21Matrix m(rows, cols);
@@ -17,8 +15,6 @@ TEST(test_determinant, normal) {
 }
 
 TEST(test_determinant, normal2) {
-    int exp = 0;
-
     int rows = 3;
     int cols = 3;
     S21Matrix m(rows, cols);
@@ -37,8 +33,6 @@ TEST(test_determinant, normal2) {
 }
 
 TEST(test_determinant, one_by_one) {
-    int exp = 5;
-
     int rows = 1;
     int cols = 1;
     S21Matrix m(rows, cols);
@@ -49,8 +43,6 @@ TEST(test_determinant, one_by_one) {
 }
 
 TEST(test_determinant, invalid) {
-    int exp = 5;
-
     int rows = 5;
     int cols = 3;
     S21Matrix m(rows, cols);

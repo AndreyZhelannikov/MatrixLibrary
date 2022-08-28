@@ -36,16 +36,15 @@ void S21Matrix::SetSize(int rows, int cols) {
 }
 
 void S21Matrix::PrintMatrix() {
-    using namespace std;
     print_line(cols_);
     for (int i = 0; i < rows_; ++i) {
-        cout << "|";
+        std::cout << "|";
         for (int j = 0; j < cols_; ++j) {
             printf("%8.2lf", matrix_[i * cols_ + j]);
             if (j != cols_ - 1)
-                cout << " ";
+                std::cout << " ";
         }
-        cout << "|\n";
+        std::cout << "|\n";
     }
     print_line(cols_);
 }
