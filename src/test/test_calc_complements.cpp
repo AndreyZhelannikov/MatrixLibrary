@@ -3,8 +3,8 @@
 #include "../s21_matrix_oop.h"
 
 TEST(test_calc_complements_1, normal) {
-    S21Matrix m(3, 3);
-    S21Matrix exp(3, 3);
+    S21Matrix m;
+    S21Matrix exp;
 
     m(0, 0) = 1;
     m(0, 1) = 2;
@@ -43,4 +43,12 @@ TEST(test_calc_complements_1, one_by_one) {
     S21Matrix m(1, 1);
 
     ASSERT_ANY_THROW(m.CalcComplements());
+}
+
+TEST(move_constructor, normal) {
+    S21Matrix m1;
+    S21Matrix m2;
+    m1(1, 1) = 5;
+    m2 = std::move(m1);
+    ASSERT_DOUBLE_EQ(m2(1, 1), 5);
 }

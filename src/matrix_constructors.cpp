@@ -20,18 +20,22 @@ S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.c
 }
 
 S21Matrix::S21Matrix(S21Matrix&& other) {
-    if (rows_ * cols_ == other.rows_ * other.cols_) {
-        std::memcpy(matrix_, other.matrix_, other.cols_ * other.rows_ * sizeof(double));
-    } else {
-        delete[] matrix_;
-        matrix_ = new double[other.rows_ * other.cols_]();
-        std::memcpy(matrix_, other.matrix_, other.cols_ * other.rows_ * sizeof(double));
+    if (this != &other) {
+        matrix_ = other.matrix_;
+        other.matrix_ = nullptr;
+        // if (rows_ * cols_ == other.rows_ * other.cols_) {
+        //     std::memcpy(matrix_, other.matrix_, other.cols_ * other.rows_ * sizeof(double));
+        // } else {
+        //     delete[] matrix_;
+        //     matrix_ = new double[other.rows_ * other.cols_]();
+        //     std::memcpy(matrix_, other.matrix_, other.cols_ * other.rows_ * sizeof(double));
+        // }
+        rows_ = other.rows_;
+        cols_ = other.cols_;
+        // delete other.matrix_;
+        other.rows_ = 0;
+        other.cols_ = 0;
     }
-    rows_ = other.rows_;
-    cols_ = other.cols_;
-    delete other.matrix_;
-    other.rows_ = 0;
-    other.cols_ = 0;
 }
 
 S21Matrix::~S21Matrix() {
